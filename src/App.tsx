@@ -101,11 +101,11 @@ const Navbar = () => (
   <nav className="fixed top-0 left-0 w-full z-[100] px-6 md:px-12 py-4 md:py-6 flex justify-between items-center bg-adnos-offwhite/80 backdrop-blur-md border-b border-black/5">
     <div className="flex items-center gap-4">
       <a className="flex items-center gap-4 group" href="#hero">
-        <img 
-          alt="ADNOS Logo" 
-          className="h-10 md:h-12 w-auto object-contain transition-transform group-hover:rotate-6" 
-          src="https://lh3.googleusercontent.com/aida/ADBb0uhuAz3P_glI2rWiEONJ8rCtBoDYnVIOMqBDbYpgZ7qod8pmdks8hCduz2-KhMlBwoQ3iwz10p6dd11KMQ-d7Vi92mh1T3Q-tSkJp3cYn2linxVtkKnWtp2zAb73GVRFJNCqP19_0BLfosxRBB3xD90szCp7q5fGbr2MevymztlSPVSPtqhOSpSPZ1_2pE9HiL7MDFb_wWUwoJNsQN2iYSt7dVFdX8nBd_iYccujiGDzcrrCKE5_-qIwA3odPO3mIP_RC7zWjUbPENE" 
-        />
+        <img
+  src="/logo.png"
+  alt="ADNOS Logo"
+  className="h-10 md:h-12 w-auto object-contain transition-transform group-hover:rotate-6"
+/>
         <div className="mono-label font-black text-adnos-black text-[10px] md:text-xs hidden sm:flex bg-white border border-black px-3 py-1.5 items-center gap-2 cursor-pointer hover:border-glitch-red transition-colors">
           ADNOS STUDIOS
         </div>
