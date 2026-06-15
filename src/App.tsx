@@ -330,6 +330,17 @@ const Vault = () => {
     }
   ]);
 
+  // Track which YouTube video is currently playing
+  const [playingProject, setPlayingProject] = useState<string | null>(null);
+
+  // Your actual YouTube Projects
+  const projects = [
+    { id: "-M7EEIN9-rM", title: "AMAR | SHORT FILM" },
+    { id: "IdSkfCVBvHU", title: "VIRAH | SHORT FILM" },
+    { id: "SZGThvBE51Q", title: "DAAKIYA (OST) MUSIC VIDEO" },
+    { id: "NaEGGMdlSsM", title: "APP PROMO" }
+  ];
+
   return (
     <section className="bg-adnos-offwhite py-24 md:py-32 px-6 relative z-40 border-t border-black" id="vault">
       <div className="max-w-[1400px] mx-auto">
@@ -383,25 +394,46 @@ const Vault = () => {
         <div className="mb-8 flex items-center justify-between border-b border-black pb-4">
           <MonoLabel className="text-adnos-black text-sm font-bold">Selected Projects</MonoLabel>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-l border-black">
-          {[
-            { title: "COMMERCIAL_UNIT_01", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCz2KAPCPyhb1hYclLzPo86uOEB_Z5odq5cCJ4S2UQBjZm7aJmuxr8g5FpQu2CyZqBsV3pjUE3jSSoM_yiuyeHHjtm8EwPTcbSIg2wbPXoMbAmCwZMX3h9Cd6YdtTaXqt3iot_5P2aSrywe2g8DafbDvMLTs-kGf7w-LDmdinOhk5sqIrcqu_qbMRY9eWknVy4ECMCYT1KNG2mUDDEeGbn6zzHk4g8HU0TFci3kyuhl2EWEJifZNgFjvnKTbDPfYNeikC6uIVaqyoU2" },
-            { title: "TECH_DOC_X", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCy7ZBV8w0AVQOavDAszW6Gcs3X3oJD7COQ0zDNROqGPjkVwTOGBt_WIuGa21sF70zqv9ohLRWMZ8KsE0VIi9VAxuK1HQ1YJN2JpI3m8hDC8bfEcjf5Py4vREvLyxCeFbwyA-V1QTNL7eRT_cIiI6C7Yk1SIFaF44tqsdHQF0uzx5NgDhguP2e9N1Hft2qHIACA1avrVeIBXJD5TPE0QLmN4sgBTjtmSfd_TwdjIZrm0YzF7LD5XgAA3v37zpUjS9eVmbpZQTwRngOI" },
-            { title: "CINEMATIC_REEL_04", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDhgEmEtbZ6PoImSACMvGzrlnwZbOJujHIXb9iYMpNratj3wcMMS1dGfgU2rTkHTCnnzjBPGJbakkYfn8f9Glzbv73Y1KaJrqbTlVCpHpgV2Ovbv1JcufVvTOUXaMgFg5fmRhYpJwWE2VELJR5k8h2IPDd2FyRx3jr2ldGvsr9hvjiJRg9kU-EY1lhsXmT33QYI7Z3gUojbW8L1OLoHZf_RqIQsPzy9mlXaynxWI0hCnwzd-uyb5YR2W95CMQTfJkg7q0RO02DSckqU" },
-            { title: "ALGO_BRAND_STORY", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBGhh1aN9JtMCIz-mNRp6fzF2OCT_zdoNXxBHsYSclZfjYZ3QQhe8M69SwHUz9tk1PwiGWmTYjVTqjHyO4Iz1Tun0S8b3PA6ypjQK4xOdaPUz5J0sf9ci4xpKmlkzgN3bdDBzHT_4x9LPTWSSj2LARgpsJBwv-DYVcXIO17Jjbp-ARWHNNRPNuWzAAH1qWfrS3HD3vIaRygggJV431n7D5AFcUefYvL3IlcvqB5EvZyttg6P1eaoBvqJfI63Jm9buwSegQtx0Rz7Ei1" }
-          ].map((item, i) => (
-            <div key={i} className="aspect-[4/5] bg-white overflow-hidden relative group cursor-none border-r border-b border-black">
-              <img 
-                alt={item.title} 
-                className="transition-all duration-700 grayscale hover:grayscale-0 hover:scale-105 w-full h-full object-cover" 
-                src={item.img} 
-              />
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
-                <h4 className="text-white text-xl md:text-2xl font-black mt-2">{item.title}</h4>
-              </div>
+        
+        {/* UPDATED YOUTUBE GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-l border-black bg-black">
+          {projects.map((item) => (
+            <div key={item.id} className="aspect-[4/5] bg-black overflow-hidden relative group border-r border-b border-black">
+              {playingProject === item.id ? (
+                // The active YouTube iframe
+                <iframe
+                  className="w-full h-full"
+                  src={`https://www.youtube.com/embed/${item.id}?autoplay=1&rel=0&modestbranding=1`}
+                  title={item.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                // The Thumbnail Facade
+                <>
+                  <img 
+                    alt={item.title} 
+                    className="transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105 w-full h-full object-cover" 
+                    src={`https://img.youtube.com/vi/${item.id}/maxresdefault.jpg`} 
+                  />
+                  <div 
+                    className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6 cursor-pointer"
+                    onClick={() => setPlayingProject(item.id)}
+                  >
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <button className="w-16 h-16 rounded-full border border-white flex items-center justify-center text-white hover:bg-glitch-red hover:border-glitch-red transition-all scale-90 group-hover:scale-100">
+                        <Play className="w-8 h-8 fill-current ml-1" />
+                      </button>
+                    </div>
+                    <h4 className="text-white text-xl md:text-2xl font-black mt-2 relative z-10 leading-tight">{item.title}</h4>
+                  </div>
+                </>
+              )}
             </div>
           ))}
         </div>
+        
         <div className="mt-16 md:mt-20 flex justify-center">
           <button className="mono-label px-8 md:px-12 py-4 md:py-5 border border-black hover:bg-black hover:text-white transition-all text-[10px] md:text-xs">
             SEE THE FULL CHAOS
@@ -428,11 +460,11 @@ const Crew = () => (
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-black overflow-hidden">
         {[
-          { name: "Prathmesh somvanshi", role: "Founder and creative director", id: "01" },
-          { name: "devasish behera", role: "co-founder and editor", id: "02" },
-          { name: "jashanpreet singh", role: "Music director", id: "03" },
-          { name: "Aaditya sharma", role: "director and editor", id: "04" },
-          { name: "kartavya gupta", role: "manager", id: "05" },
+          { name: "PRATHMESH SOMVANSHI", role: "FOUNDER AND CREATIVE DIRECTOR", id: "01" },
+          { name: "DEVASISH BEHERA", role: "CO-FOUNDER AND EDITOR", id: "02" },
+          { name: "JASHANPREET SINGH", role: "CO-FOUNDER & SOUND DIRECTOR", id: "03" },
+          { name: "AADITYA SHARMA", role: "CO-FOUNDER & DIRECTOR/EDITOR", id: "04" },
+          { name: "KARTAVYA GUPTA", role: "MANAGER", id: "05" },
         ].map(member => (
           <div key={member.name} className="bg-adnos-offwhite p-6 md:p-8 group hover:bg-black hover:text-white transition-all border-r border-b border-black">
             <div className="aspect-square bg-adnos-gray mb-6 overflow-hidden border border-black flex items-center justify-center">
