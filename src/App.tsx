@@ -1,5 +1,8 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, type ReactNode } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { Play } from 'lucide-react';
+import CursorTrail from './components/CursorTrail';
+import FloatingEmojis from './components/FloatingEmojis';
 
 // --- Glitch Effect ---
 
@@ -74,17 +77,14 @@ const ParticleSystem = () => {
     </div>
   );
 };
-import { Play, Instagram, Linkedin, Github, Youtube, ArrowDown } from 'lucide-react';
-import CursorTrail from './components/CursorTrail';
-import FloatingEmojis from './components/FloatingEmojis';
 
 // --- Utility Components ---
 
-const MonoLabel = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => (
+const MonoLabel = ({ children, className = "" }: { children: ReactNode, className?: string }) => (
   <div className={`mono-label ${className}`}>{children}</div>
 );
 
-const Reveal = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
+const Reveal = ({ children, delay = 0 }: { children: ReactNode, delay?: number }) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -416,9 +416,12 @@ const Contact = () => (
       </Reveal>
       <Reveal delay={0.2}>
         <div className="flex flex-col items-center gap-10 md:gap-12">
-          <button className="bg-adnos-black text-adnos-offwhite px-10 md:px-16 py-6 md:py-8 font-black uppercase tracking-[0.2em] text-base md:text-xl hover:bg-glitch-red transition-all shadow-[10px_10px_0px_#ff003c] md:shadow-[15px_15px_0px_#ff003c] hover:shadow-none hover:translate-x-2 hover:translate-y-2">
+          <a
+            className="bg-adnos-black text-adnos-offwhite px-10 md:px-16 py-6 md:py-8 font-black uppercase tracking-[0.2em] text-base md:text-xl hover:bg-glitch-red transition-all shadow-[10px_10px_0px_#ff003c] md:shadow-[15px_15px_0px_#ff003c] hover:shadow-none hover:translate-x-2 hover:translate-y-2"
+            href="mailto:HELLO@ADNOS.PRODUCTIONS"
+          >
             DROP A LINE
-          </button>
+          </a>
           <div className="mono-label flex flex-wrap justify-center gap-4 md:gap-10 pt-4 md:pt-8 opacity-60 text-[10px] md:text-xs">
             <a className="hover:opacity-100 hover:text-glitch-red underline decoration-glitch-red underline-offset-4 transition-colors break-all md:break-normal" href="mailto:HELLO@ADNOS.PRODUCTIONS">HELLO@ADNOS.PRODUCTIONS</a>
             <a className="hover:opacity-100 hover:text-glitch-blue transition-colors" href="#">INSTAGRAM</a>

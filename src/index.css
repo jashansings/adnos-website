@@ -66,7 +66,10 @@
 .film-grain {
   position: absolute;
   inset: 0;
-  background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDn5UlpdtX9CIE8JXSlcD0IliT2U6fpysGzG5blG4cg56Hw5eLY5HjgFG8b-KglBzPEXyTB7we1bXwBrIB6j6G4hNOiwHNGOHYXKS5udM8tX1U57UlpHWVXtBcacEQB8Oqor2wEg8OEkQBeOsPLMo6SEs79cOQNuz_NNkXOqomK1Ecz9iKiKfBetfHEqy0yT8_HiOaVkldlmCtrMQCnjDU0b1TelwrmUrRtjJEbu3T-uRCounter);
+  background-image:
+    radial-gradient(circle at 20% 30%, rgb(255 255 255 / 8%) 0 1px, transparent 1px),
+    radial-gradient(circle at 70% 60%, rgb(0 0 0 / 10%) 0 1px, transparent 1px);
+  background-size: 4px 4px, 6px 6px;
   opacity: 0.05;
   pointer-events: none;
   z-index: 5;

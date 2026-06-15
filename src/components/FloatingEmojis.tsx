@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
-
-const EMOJIS = ['🎬', '🎥', '⚡', '🤖', '📐', '🚀', '👾', '✨'];
+import { useEffect, useState, type CSSProperties } from 'react';
 
 interface EmojiProps {
   id: number;
   emoji: string;
-  style: React.CSSProperties;
+  style: CSSProperties;
 }
 
 export default function FloatingEmojis() {
@@ -32,7 +30,7 @@ export default function FloatingEmojis() {
         '--size': `${item.size}px`,
         top: `${item.top}%`,
         left: `${item.left}%`,
-      } as React.CSSProperties,
+      } as CSSProperties,
     }));
 
     setEmojis(generated);
