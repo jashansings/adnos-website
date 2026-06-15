@@ -205,28 +205,23 @@ const Showreel = () => {
         <Reveal>
           <div 
             onClick={togglePlay}
-            className="relative group border-[1px] border-white/20 aspect-video overflow-hidden bg-neutral-900 mx-auto shadow-[0_0_50px_rgba(255,255,255,0.1)] border-white/40 border-2 cursor-pointer"
+            className="relative group border-[1px] border-white/20 aspect-video overflow-hidden bg-black mx-auto shadow-[0_0_50px_rgba(255,255,255,0.1)] border-white/40 border-2 cursor-pointer"
           >
             <div className="film-grain z-10 pointer-events-none"></div>
             
-            {/* The Actual Video Element */}
+            {/* The Actual Video Element - Note the #t=0.001 trick to force the first frame */}
             <video
               ref={videoRef}
-              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}
-              src="/showcase3rd-web.mp4"
+              className="absolute top-0 left-0 w-full h-full object-cover"
+              src="/showcase3rd-web.mp4#t=0.001"
               loop
               playsInline
             />
 
-            {/* Thumbnail Overlay (Visible when paused) */}
+            {/* Dark Overlay & Play Button (Fades out seamlessly when playing) */}
             <div className={`absolute inset-0 z-20 flex items-center justify-center bg-black/40 transition-all duration-500 ${isPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100 group-hover:bg-black/20'}`}>
-              <img 
-                alt="Showreel Thumbnail" 
-                className="absolute inset-0 w-full h-full object-cover -z-10 opacity-60" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7oefnBZYhluzWoZ3a6TAlzAsHAG8fGgCszGOrpOFqq0FX1jc2gUAxOWaR7Liz-_MXt7NYoJiSoT9bI_IPCKwI8UpGSFV9gJcHNbDgagLNGmt_SoVOtDLfWoC-QzFMQn1rod-cWpFVSTfBS4Qcmxzo1fx5igELltEKgYjuj4a-RR3ZOcAiGh_2QxybLmFQSXZi616wQzEHGaD3bZMs3dtNtN4u1mGlnTBT6XDS04br35NQid03eisvzfmykoKm9ESylYM1D5j2bABo" 
-              />
-              <button className="w-16 h-16 md:w-24 md:h-24 rounded-full border border-white flex items-center justify-center text-white hover:bg-glitch-red hover:border-glitch-red transition-all group-hover:scale-110">
-                <Play className="w-8 h-8 md:w-10 md:h-10 fill-current ml-2" />
+              <button className="w-16 h-16 md:w-24 md:h-24 rounded-full border border-white flex items-center justify-center text-white hover:bg-glitch-red hover:border-glitch-red transition-all group-hover:scale-110 shadow-lg">
+                <Play className="w-8 h-8 md:w-10 md:h-10 fill-current ml-1 md:ml-2" />
               </button>
             </div>
 
