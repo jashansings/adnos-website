@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, useCallback, type ReactNode } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { Play } from 'lucide-react';
 import CursorTrail from './components/CursorTrail';
-import FloatingEmojis from './components/FloatingEmojis';
 
 // --- Glitch Effect ---
 
@@ -102,10 +101,10 @@ const Navbar = () => (
     <div className="flex items-center gap-4">
       <a className="flex items-center gap-4 group" href="#hero">
         <img
-  src="/logo.png"
-  alt="ADNOS Logo"
-  className="h-10 md:h-12 w-auto object-contain transition-transform group-hover:rotate-6"
-/>
+          src="/logo.png"
+          alt="ADNOS Logo"
+          className="h-10 md:h-12 w-auto object-contain transition-transform group-hover:rotate-6"
+        />
         <div className="mono-label font-black text-adnos-black text-[10px] md:text-xs hidden sm:flex bg-white border border-black px-3 py-1.5 items-center gap-2 cursor-pointer hover:border-glitch-red transition-colors">
           ADNOS STUDIOS
         </div>
@@ -120,46 +119,80 @@ const Navbar = () => (
   </nav>
 );
 
-const Hero = () => (
-  <section className="flex flex-col items-center justify-center relative overflow-hidden bg-adnos-offwhite px-6 pt-40 min-h-[120vh] pb-24" id="hero">
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
-      <svg className="w-[200vw] md:w-[180vw] h-auto animate-rotate-slow" viewBox="0 0 500 500">
-        <path d="M 250, 250 m -240, 0 a 240,240 0 1,1 480,0 a 240,240 0 1,1 -480,0" fill="transparent" id="heroPath"></path>
-        <text className="fill-adnos-black font-black text-[22px] uppercase font-montserrat">
-          <textPath href="#heroPath" startOffset="0%">
-            ADNOS — COMMERCIALS — FEATURE FILMS — DOCUMENTARIES — ADNOS — HIGH STAKES CAMPAIGNS — IIT BOMBAY — EXPERIMENTAL —
-          </textPath>
-        </text>
-      </svg>
-    </div>
-    <div className="relative z-20 text-center max-w-5xl">
-      <Reveal>
-        <h1 
-          className="display-brutalist text-huge -tracking-[0.08em] mb-4 hover:text-glitch-red transition-colors duration-300 cursor-pointer"
-          onClick={triggerSystemGlitch}
-        >
-          ADNOS
-        </h1>
-      </Reveal>
-      <Reveal delay={0.2}>
-        <p className="text-adnos-black font-black text-2xl md:text-6xl lg:text-7xl leading-[0.9] uppercase max-w-5xl mx-auto font-montserrat">
-          IT LOOKS LIKE A CAMPAIGN.
-        </p>
-      </Reveal>
-      <Reveal delay={0.4}>
-        <p className="text-adnos-black font-black text-2xl md:text-6xl lg:text-7xl leading-[0.9] uppercase max-w-5xl mx-auto font-montserrat">
-          IT FEELS LIKE AN EXPERIENCE.
-        </p>
-      </Reveal>
-      <Reveal delay={0.6}>
-        <div className="mt-12 md:mt-16 flex flex-col items-center">
-          <span className="mono-label mb-4 animate-bounce opacity-50 text-[10px] md:text-xs">Scroll to experience peak</span>
-          <div className="w-px h-16 md:h-24 bg-black/20"></div>
-        </div>
-      </Reveal>
-    </div>
-  </section>
-);
+const Hero = () => {
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  return (
+    <section className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-black" id="hero">
+      
+      {/* Background Video */}
+      <video
+        ref={videoRef}
+        src="/showcase3rd-web.mp4"
+        autoPlay
+        loop
+        playsInline
+        muted={true}
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+      />
+
+      {/* Dark Overlay */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black/60 z-10" />
+
+      {/* Foreground Content */}
+      <div className="relative z-20 text-center flex flex-col items-center px-4 mt-16 md:mt-0 select-none">
+        <Reveal>
+          <h1 
+            className="display-brutalist text-[#FF0033] text-7xl md:text-[10rem] tracking-tighter leading-none hover:text-white transition-colors duration-300 cursor-pointer"
+            onClick={triggerSystemGlitch}
+          >
+            ADNOS
+          </h1>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <h2 className="text-white font-montserrat font-black text-3xl md:text-6xl uppercase max-w-4xl leading-tight mt-4 tracking-tight">
+            It looks like a campaign.<br />
+            <span className="text-gray-400">It feels like an experience.</span>
+          </h2>
+        </Reveal>
+        <Reveal delay={0.6}>
+          <div className="mt-12 md:mt-16 flex flex-col items-center">
+            <span className="mono-label mb-4 animate-bounce text-white/50 text-[10px] md:text-xs uppercase tracking-widest">
+              Scroll to experience peak
+            </span>
+            <div className="w-px h-16 md:h-24 bg-white/20"></div>
+          </div>
+        </Reveal>
+      </div>
+
+      {/* Mute/Unmute Button */}
+      <button
+        onClick={toggleMute}
+        className="absolute bottom-10 right-10 z-30 p-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all duration-300 cursor-pointer focus:outline-none group"
+        aria-label={isMuted ? "Unmute showreel" : "Mute showreel"}
+      >
+        {isMuted ? (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+          </svg>
+        ) : (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+          </svg>
+        )}
+      </button>
+    </section>
+  );
+};
 
 const Showreel = () => (
   <section className="bg-adnos-black py-20 md:py-32 px-6 relative" id="showreel">
@@ -197,7 +230,6 @@ const Showreel = () => (
 );
 
 const HorizontalExperience = () => {
-  // Let's use a standard horizontal scroll approach with motion
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: horizontalProgress } = useScroll({
     target: scrollRef,
@@ -262,8 +294,7 @@ const HorizontalExperience = () => {
 };
 
 const Vault = () => {
-  // Demo high-quality looping stock video assets
-  const [showreels, setShowreels] = useState([
+  const [showreels] = useState([
     {
       id: "SHOWREEL_01",
       title: "CINEMATIC // DIRECTOR'S CUT",
@@ -292,7 +323,6 @@ const Vault = () => {
           </Reveal>
         </div>
 
-        {/* --- AUTOPLAYING SHOWREELS (DIRECT ENTRY, NO CLICK REQUIRED) --- */}
         <div className="mb-20">
           <div className="mb-8 flex items-center justify-between border-b border-black pb-4">
             <MonoLabel className="text-glitch-red text-sm font-bold">Featured Showreels (Live Loop)</MonoLabel>
@@ -315,7 +345,6 @@ const Vault = () => {
                   playsInline
                 />
                 
-                {/* Visual Accent Vignette Overlays */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent p-6 flex flex-col justify-end">
                   <span className="mono-label text-glitch-red text-[10px] mb-1 font-bold">{reel.id}</span>
                   <h3 className="text-white font-montserrat font-black text-xl md:text-2xl leading-none uppercase tracking-tight">
@@ -330,7 +359,6 @@ const Vault = () => {
           </div>
         </div>
 
-        {/* --- PROJECTS GRID --- */}
         <div className="mb-8 flex items-center justify-between border-b border-black pb-4">
           <MonoLabel className="text-adnos-black text-sm font-bold">Selected Projects</MonoLabel>
         </div>
@@ -469,7 +497,7 @@ const Footer = () => (
               <p className="mono-label text-[9px] md:text-[10px] opacity-30 text-white">
                 © 2024 ADNOS PRODUCTIONS PVT LTD. ALL RIGHTS RESERVED.
                 <br />
-                Website designed by prathmesh somvanshi
+                Website designed by gittha op
               </p>
             </div>
           </div>
@@ -485,7 +513,6 @@ export default function App() {
       <div className="film-grain" />
       <CursorTrail />
       <ParticleSystem />
-      <FloatingEmojis />
       <Navbar />
       <Hero />
       <Showreel />
