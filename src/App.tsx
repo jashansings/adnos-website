@@ -330,10 +330,8 @@ const Vault = () => {
     }
   ]);
 
-  // Track which YouTube video is currently playing
   const [playingProject, setPlayingProject] = useState<string | null>(null);
 
-  // Your actual YouTube Projects
   const projects = [
     { id: "-M7EEIN9-rM", title: "AMAR | SHORT FILM" },
     { id: "IdSkfCVBvHU", title: "VIRAH | SHORT FILM" },
@@ -377,7 +375,7 @@ const Vault = () => {
                   playsInline
                 />
                 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent p-6 flex flex-col justify-end">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent p-6 flex flex-col justify-end pointer-events-none">
                   <span className="mono-label text-glitch-red text-[10px] mb-1 font-bold">{reel.id}</span>
                   <h3 className="text-white font-montserrat font-black text-xl md:text-2xl leading-none uppercase tracking-tight">
                     {reel.title}
@@ -395,12 +393,10 @@ const Vault = () => {
           <MonoLabel className="text-adnos-black text-sm font-bold">Selected Projects</MonoLabel>
         </div>
         
-        {/* UPDATED YOUTUBE GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-l border-black bg-black">
           {projects.map((item) => (
             <div key={item.id} className="aspect-[4/5] bg-black overflow-hidden relative group border-r border-b border-black">
               {playingProject === item.id ? (
-                // The active YouTube iframe
                 <iframe
                   className="w-full h-full"
                   src={`https://www.youtube.com/embed/${item.id}?autoplay=1&rel=0&modestbranding=1`}
@@ -410,25 +406,26 @@ const Vault = () => {
                   allowFullScreen
                 ></iframe>
               ) : (
-                // The Thumbnail Facade
-                <>
+                <div 
+                  className="absolute inset-0 w-full h-full cursor-pointer"
+                  onClick={() => setPlayingProject(item.id)}
+                >
                   <img 
-                    alt={item.title} 
+                    alt={item.title}
+                    loading="lazy"
+                    decoding="async"
                     className="transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105 w-full h-full object-cover" 
                     src={`https://img.youtube.com/vi/${item.id}/maxresdefault.jpg`} 
                   />
-                  <div 
-                    className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6 cursor-pointer"
-                    onClick={() => setPlayingProject(item.id)}
-                  >
+                  <div className="absolute inset-0 bg-black/60 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <button className="w-16 h-16 rounded-full border border-white flex items-center justify-center text-white hover:bg-glitch-red hover:border-glitch-red transition-all scale-90 group-hover:scale-100">
+                      <button className="w-16 h-16 rounded-full border border-white flex items-center justify-center text-white group-hover:bg-glitch-red group-hover:border-glitch-red transition-all scale-100 md:scale-90 md:group-hover:scale-100">
                         <Play className="w-8 h-8 fill-current ml-1" />
                       </button>
                     </div>
                     <h4 className="text-white text-xl md:text-2xl font-black mt-2 relative z-10 leading-tight">{item.title}</h4>
                   </div>
-                </>
+                </div>
               )}
             </div>
           ))}
