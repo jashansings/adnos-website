@@ -551,8 +551,6 @@ const Footer = () => (
               <h3 className="display-brutalist text-lg md:text-xl leading-none">ADNOS STUDIOS</h3>
               <p className="mono-label text-[9px] md:text-[10px] opacity-30 text-white">
                 © 2024 ADNOS PRODUCTIONS PVT LTD. ALL RIGHTS RESERVED.
-                <br />
-                Website designed by prathmesh somvanshi
               </p>
             </div>
           </div>
