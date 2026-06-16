@@ -320,7 +320,7 @@ const Vault = () => {
       id: "SHOWREEL_01",
       title: "EMOTIVE NARRATIVES",
       desc: "Cinematic Storytelling & Human Connection",
-      youtubeId: "Sd9qVmHBxo8", // Extracts ID from https://youtu.be/Sd9qVmHBxo8
+      youtubeId: "Sd9qVmHBxo8", 
     },
     {
       id: "SHOWREEL_02",
@@ -330,6 +330,8 @@ const Vault = () => {
     }
   ]);
 
+  // Track which videos are currently playing in both sections
+  const [playingShowreel, setPlayingShowreel] = useState<string | null>(null);
   const [playingProject, setPlayingProject] = useState<string | null>(null);
 
   const projects = [
@@ -355,8 +357,8 @@ const Vault = () => {
 
         <div className="mb-20">
           <div className="mb-8 flex items-center justify-between border-b border-black pb-4">
-            <MonoLabel className="text-glitch-red text-sm font-bold">Featured Showreels (Live Loop)</MonoLabel>
-            <MonoLabel className="text-xs opacity-50">Direct Playback</MonoLabel>
+            <MonoLabel className="text-glitch-red text-sm font-bold">Featured Showreels (Interactive)</MonoLabel>
+            <MonoLabel className="text-xs opacity-50">Click to Play</MonoLabel>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -367,35 +369,47 @@ const Vault = () => {
               >
                 <div className="film-grain z-10 pointer-events-none" />
                 
-                {/* Dynamically render an iframe if it's a YouTube link, or a video tag if it's an mp4 */}
-                {reel.youtubeId ? (
+                {playingShowreel === reel.id ? (
                   <iframe
-                    className="absolute inset-0 w-full h-full opacity-80 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    src={`https://www.youtube.com/embed/${reel.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${reel.youtubeId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
+                    className="absolute inset-0 w-full h-full z-20"
+                    src={`https://www.youtube.com/embed/${reel.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
                     title={reel.title}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                   ></iframe>
                 ) : (
-                  <video
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                    src={reel.videoUrl}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  />
+                  <div 
+                    className="absolute inset-0 w-full h-full cursor-pointer z-20"
+                    onClick={() => setPlayingShowreel(reel.id)}
+                  >
+                    <img 
+                      alt={reel.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" 
+                      src={`https://img.youtube.com/vi/${reel.youtubeId}/maxresdefault.jpg`} 
+                    />
+                    
+                    {/* Play Button Overlay */}
+                    <div className="absolute inset-0 bg-black/30 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <button className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-white flex items-center justify-center text-white group-hover:bg-glitch-red group-hover:border-glitch-red transition-all scale-100 md:scale-90 md:group-hover:scale-100">
+                        <Play className="w-8 h-8 md:w-10 md:h-10 fill-current ml-1" />
+                      </button>
+                    </div>
+
+                    {/* Text Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-6 flex flex-col justify-end pointer-events-none">
+                      <span className="mono-label text-glitch-red text-[10px] mb-1 font-bold">{reel.id}</span>
+                      <h3 className="text-white font-montserrat font-black text-xl md:text-2xl leading-none uppercase tracking-tight">
+                        {reel.title}
+                      </h3>
+                      <p className="text-white/70 font-mono text-xs mt-2">
+                        {reel.desc}
+                      </p>
+                    </div>
+                  </div>
                 )}
-                
-                <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/80 via-black/10 to-transparent p-6 flex flex-col justify-end pointer-events-none">
-                  <span className="mono-label text-glitch-red text-[10px] mb-1 font-bold">{reel.id}</span>
-                  <h3 className="text-white font-montserrat font-black text-xl md:text-2xl leading-none uppercase tracking-tight">
-                    {reel.title}
-                  </h3>
-                  <p className="text-white/70 font-mono text-xs mt-2">
-                    {reel.desc}
-                  </p>
-                </div>
               </div>
             ))}
           </div>
