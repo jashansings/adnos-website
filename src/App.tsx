@@ -460,15 +460,22 @@ const Crew = () => (
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-black overflow-hidden">
         {[
-          { name: "PRATHMESH SOMVANSHI", role: "FOUNDER AND CREATIVE DIRECTOR", id: "01" },
-          { name: "DEVASISH BEHERA", role: "CO-FOUNDER AND EDITOR", id: "02" },
-          { name: "JASHANPREET SINGH", role: "CO-FOUNDER & SOUND DIRECTOR", id: "03" },
-          { name: "AADITYA SHARMA", role: "CO-FOUNDER & DIRECTOR/EDITOR", id: "04" },
-          { name: "KARTAVYA GUPTA", role: "MANAGER", id: "05" },
+          { name: "PRATHMESH SOMVANSHI", role: "FOUNDER AND CREATIVE DIRECTOR", id: "01", img: "/crew/PRATHMESH.jpg" },
+          { name: "DEVASISH BEHERA", role: "CO-FOUNDER AND EDITOR", id: "02", img: "/crew/DEVASISH.jpg" },
+          { name: "JASHANPREET SINGH", role: "CO-FOUNDER & SOUND DIRECTOR", id: "03", img: "/crew/JASHANPREET.jpg" },
+          { name: "AADITYA SHARMA", role: "CO-FOUNDER & DIRECTOR/EDITOR", id: "04", img: "/crew/AADITYA.jpg" },
+          { name: "KARTAVYA GUPTA", role: "MANAGER", id: "05", img: "/crew/KARTAVYA.jpg" },
         ].map(member => (
           <div key={member.name} className="bg-adnos-offwhite p-6 md:p-8 group hover:bg-black hover:text-white transition-all border-r border-b border-black">
-            <div className="aspect-square bg-adnos-gray mb-6 overflow-hidden border border-black flex items-center justify-center">
-              <div className="text-black/20 font-black text-4xl group-hover:text-white/20">{member.id}</div>
+            <div className="aspect-square bg-adnos-gray mb-6 overflow-hidden border border-black relative">
+              <img 
+                src={member.img} 
+                alt={member.name} 
+                className="absolute top-0 left-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" 
+              />
+              <div className="absolute top-4 right-4 text-white/30 font-black text-2xl group-hover:text-white/60 transition-colors pointer-events-none drop-shadow-md z-10">
+                {member.id}
+              </div>
             </div>
             <h3 className="display-brutalist text-xl md:text-2xl mb-1">{member.name}</h3>
             <MonoLabel className="opacity-60">{member.role}</MonoLabel>
