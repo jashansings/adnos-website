@@ -318,15 +318,15 @@ const Vault = () => {
   const [showreels, setShowreels] = useState([
     {
       id: "SHOWREEL_01",
-      title: "CINEMATIC // DIRECTOR'S CUT",
-      desc: "High Stakes Cinema & Creative Vision",
-      videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-camera-filming-a-scene-in-slow-motion-41804-large.mp4",
+      title: "EMOTIVE NARRATIVES",
+      desc: "Cinematic Storytelling & Human Connection",
+      youtubeId: "Sd9qVmHBxo8", // Extracts ID from https://youtu.be/Sd9qVmHBxo8
     },
     {
       id: "SHOWREEL_02",
-      title: "ADVERTISING // CYBER NEON",
-      desc: "Commercial Campaigns & Brand Identity",
-      videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-cyberpunk-neon-city-street-at-night-40134-large.mp4",
+      title: "RAW & REAL",
+      desc: "Naturally Connecting Emotions Vision",
+      youtubeId: "h25Y7PigpDc",
     }
   ]);
 
@@ -365,17 +365,29 @@ const Vault = () => {
                 key={reel.id} 
                 className="relative aspect-video bg-black border border-black overflow-hidden group shadow-[5px_5px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
               >
-                <div className="film-grain" />
-                <video
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                  src={reel.videoUrl}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                />
+                <div className="film-grain z-10 pointer-events-none" />
                 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent p-6 flex flex-col justify-end pointer-events-none">
+                {/* Dynamically render an iframe if it's a YouTube link, or a video tag if it's an mp4 */}
+                {reel.youtubeId ? (
+                  <iframe
+                    className="absolute inset-0 w-full h-full opacity-80 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    src={`https://www.youtube.com/embed/${reel.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${reel.youtubeId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
+                    title={reel.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  ></iframe>
+                ) : (
+                  <video
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                    src={reel.videoUrl}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                )}
+                
+                <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/80 via-black/10 to-transparent p-6 flex flex-col justify-end pointer-events-none">
                   <span className="mono-label text-glitch-red text-[10px] mb-1 font-bold">{reel.id}</span>
                   <h3 className="text-white font-montserrat font-black text-xl md:text-2xl leading-none uppercase tracking-tight">
                     {reel.title}
