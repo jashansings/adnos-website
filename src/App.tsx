@@ -463,13 +463,13 @@ const Vault = () => {
   {
     id: "SHOWREEL_01",
     title: "EMOTIVE NARRATIVES",
-    desc: "Cinematic Storytelling & Human Connection",
+    // desc: "Cinematic Storytelling & Human Connection",
     youtubeId: "iQlEXLqwd9M",
   },
   {
     id: "SHOWREEL_02",
     title: "RAW & REAL",
-    desc: "Naturally Connecting Emotions Vision",
+    // desc: "Naturally Connecting Emotions Vision",
     youtubeId: "HmGNWN4jStU",
   }
 ]);
