@@ -460,19 +460,19 @@ const Vault = () => {
   const { isDark } = useContext(ThemeContext);
   
   const [showreels] = useState([
-    {
-      id: "SHOWREEL_01",
-      title: "EMOTIVE NARRATIVES",
-      desc: "Cinematic Storytelling & Human Connection",
-      youtubeId: "Sd9qVmHBxo8", 
-    },
-    {
-      id: "SHOWREEL_02",
-      title: "RAW & REAL",
-      desc: "Naturally Connecting Emotions Vision",
-      youtubeId: "h25Y7PigpDc",
-    }
-  ]);
+  {
+    id: "SHOWREEL_01",
+    title: "EMOTIVE NARRATIVES",
+    desc: "Cinematic Storytelling & Human Connection",
+    youtubeId: "iQlEXLqwd9M",
+  },
+  {
+    id: "SHOWREEL_02",
+    title: "RAW & REAL",
+    desc: "Naturally Connecting Emotions Vision",
+    youtubeId: "HmGNWN4jStU",
+  }
+]);
 
   const [playingShowreel, setPlayingShowreel] = useState<string | null>(null);
   const [playingProject, setPlayingProject] = useState<string | null>(null);
@@ -531,7 +531,7 @@ const Vault = () => {
                       loading="lazy"
                       decoding="async"
                       className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" 
-                      src={`https://img.youtube.com/vi/${reel.youtubeId}/maxresdefault.jpg`} 
+                      src={`https://img.youtube.com/vi/${reel.youtubeId}/hqdefault.jpg`} 
                     />
                     
                     <div className="absolute inset-0 bg-black/30 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity flex items-center justify-center">
