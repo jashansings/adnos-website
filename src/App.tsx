@@ -304,67 +304,21 @@ const Hero = () => {
   );
 };
 
-const [showreels] = useState([
-    {
-      id: "SHOWREEL_01",
-      title: "EMOTIVE NARRATIVES",
-      desc: "Cinematic Storytelling & Human Connection",
-      youtubeId: "iQlEXLqwd9M",
-    },
-    {
-      id: "SHOWREEL_02",
-      title: "RAW & REAL",
-      desc: "Naturally Connecting Emotions Vision",
-      youtubeId: "HmGNWN4jStU",
+const Showreel = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
     }
-  ]);
-
-  const [playingShowreel, setPlayingShowreel] = useState<string | null>(null);
-  const [playingProject, setPlayingProject] = useState<string | null>(null);
-
-  const projects = [
-    { id: "-M7EEIN9-rM", title: "AMAR | SHORT FILM" },
-    { id: "IdSkfCVBvHU", title: "VIRAH | SHORT FILM" },
-    { id: "SZGThvBE51Q", title: "DAAKIYA (OST) MUSIC VIDEO" },
-    { id: "NaEGGMdlSsM", title: "APP PROMO" }
-  ];
-
-  return (
-    <section className={`py-24 md:py-32 px-6 relative z-40 border-t transition-colors duration-0 ${isDark ? 'bg-[#050505] border-white/20' : 'bg-adnos-offwhite border-black'}`} id="vault">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-baseline mb-12 md:mb-16">
-          <Reveal>
-            <h2 className={`display-brutalist text-section-title hover:text-glitch-red transition-colors mb-4 md:mb-8 cursor-pointer ${isDark ? 'text-white' : 'text-adnos-black'}`} onClick={triggerSystemGlitch}>PORTFOLIO</h2>
-          </Reveal>
-        </div>
-
-        <div className="mb-20">
-          <div className={`mb-8 flex items-center justify-between border-b pb-4 ${isDark ? 'border-white/20 text-white' : 'border-black text-adnos-black'}`}>
-            <MonoLabel className="text-glitch-red text-sm font-bold">Featured Showreels (Interactive)</MonoLabel>
-            <MonoLabel className="text-xs opacity-50">Click to Play</MonoLabel>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {showreels.map((reel) => (
-              <div key={reel.id} className={`relative aspect-video bg-black border overflow-hidden group hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all ${isDark ? 'border-white/20 shadow-[5px_5px_0px_rgba(255,255,255,0.1)]' : 'border-black shadow-[5px_5px_0px_rgba(0,0,0,1)]'}`}>
-                {playingShowreel === reel.id ? (
-                  <iframe className="absolute inset-0 w-full h-full z-20" src={`https://www.youtube.com/embed/${reel.youtubeId}?autoplay=1`} title={reel.title} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                ) : (
-                  <div className="absolute inset-0 w-full h-full cursor-pointer z-20" onClick={() => setPlayingShowreel(reel.id)}>
-                    <img alt={reel.title} className="absolute inset-0 w-full h-full object-cover opacity-80" src={`https://img.youtube.com/vi/${reel.youtubeId}/maxresdefault.jpg`} />
-                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                      <button className="w-16 h-16 rounded-full border border-white flex items-center justify-center text-white"><Play className="w-8 h-8 fill-current ml-1" /></button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+  };
 
   const toggleMute = (e: React.MouseEvent) => {
     e.stopPropagation();
