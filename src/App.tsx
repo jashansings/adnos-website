@@ -661,36 +661,41 @@ const Contact = () => {
 
   return (
     <section className={`py-24 md:py-40 px-6 relative z-30 transition-colors duration-0 ${isDark ? 'bg-[#050505] text-white' : 'bg-adnos-offwhite text-adnos-black'}`} id="contact">
-      <div className="max-w-5xl mx-auto text-center space-y-10 md:space-y-12">
-        <Reveal>
-          <h2 
-            className="display-brutalist text-section-title hover:text-glitch-blue transition-colors cursor-pointer"
-            onClick={triggerSystemGlitch}
-          >
-            LET'S TALK
-          </h2>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <p className="text-xl md:text-3xl font-black uppercase tracking-tighter max-w-2xl mx-auto font-montserrat">
-            IF YOU HAVE A PROJECT (OR JUST WANT TO DISCUSS SCI-FI), WE'RE LISTENING.
-          </p>
-        </Reveal>
-        <Reveal delay={0.2}>
-          <div className="flex flex-col items-center gap-10 md:gap-12">
-            <a
-              className={`px-10 md:px-16 py-6 md:py-8 font-black uppercase tracking-[0.2em] text-base md:text-xl hover:bg-glitch-red transition-all shadow-[10px_10px_0px_#ff003c] md:shadow-[15px_15px_0px_#ff003c] hover:shadow-none hover:translate-x-2 hover:translate-y-2 ${isDark ? 'bg-white text-black' : 'bg-adnos-black text-adnos-offwhite'}`}
-              href="mailto:info.adnosproductions@gmail.com"
-            >
-              DROP A LINE
-            </a>
-            <div className="mono-label flex flex-wrap justify-center gap-4 md:gap-10 pt-4 md:pt-8 opacity-60 text-[10px] md:text-xs">
-              <a className="hover:opacity-100 hover:text-glitch-red underline decoration-glitch-red underline-offset-4 transition-colors break-all md:break-normal uppercase" href="mailto:info.adnosproductions@gmail.com">info.adnosproductions@gmail.com</a>
-              <a className="hover:opacity-100 hover:text-glitch-blue transition-colors" href="https://www.instagram.com/adnosstudios/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
-              <a className="hover:opacity-100 hover:text-glitch-red transition-colors" href="https://www.linkedin.com/company/adnos-studios/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
-            </div>
-          </div>
-        </Reveal>
-      </div>
+      <div className="mono-label flex flex-wrap justify-center gap-4 md:gap-10 pt-4 md:pt-8 opacity-60 text-[10px] md:text-xs">
+  <a
+    className="hover:opacity-100 hover:text-glitch-red underline decoration-glitch-red underline-offset-4 transition-colors break-all md:break-normal uppercase"
+    href="mailto:info.adnosproductions@gmail.com"
+  >
+    info.adnosproductions@gmail.com
+  </a>
+
+  <a
+    className="hover:opacity-100 hover:text-glitch-blue transition-colors"
+    href="https://www.instagram.com/adnosstudios/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    INSTAGRAM
+  </a>
+
+  <a
+    className="hover:opacity-100 hover:text-red-500 transition-colors"
+    href="https://www.youtube.com/channel/UCj2AHDxuA5BQSs0DMo8EmUw"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    YOUTUBE
+  </a>
+
+  <a
+    className="hover:opacity-100 hover:text-glitch-red transition-colors"
+    href="https://www.linkedin.com/company/adnos-studios/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    LINKEDIN
+  </a>
+</div>
     </section>
   );
 };
@@ -719,6 +724,14 @@ const Footer = () => (
               <p className="mono-label text-glitch-red">SOCIALS</p>
               <nav className="flex flex-col gap-2 mono-label text-[10px] md:text-xs">
                 <a className="hover:text-glitch-blue transition-colors" href="https://www.instagram.com/adnosstudios/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+                <a
+  className="hover:opacity-100 hover:text-red-500 transition-colors"
+  href="https://www.youtube.com/channel/UCj2AHDxuA5BQSs0DMo8EmUw"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  YOUTUBE
+</a>
                 <a className="hover:text-glitch-blue transition-colors" href="https://www.linkedin.com/company/adnos-studios/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
               </nav>
             </div>
@@ -727,7 +740,7 @@ const Footer = () => (
             <div className="flex flex-col gap-2">
               <h3 className="display-brutalist text-lg md:text-xl leading-none">ADNOS STUDIOS</h3>
               <p className="mono-label text-[9px] md:text-[10px] opacity-30 text-white">
-                © 2024 ADNOS PRODUCTIONS PVT LTD. ALL RIGHTS RESERVED.
+                © 2026 ADNOS PRODUCTIONS PVT LTD. ALL RIGHTS RESERVED.
               </p>
             </div>
           </div>
