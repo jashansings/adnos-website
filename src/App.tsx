@@ -304,21 +304,20 @@ const Hero = () => {
   );
 };
 
-const Showreel = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
+const [showreels] = useState([
+    {
+      id: "SHOWREEL_01",
+      title: "EMOTIVE NARRATIVES",
+      desc: "Cinematic Storytelling & Human Connection",
+      youtubeId: "iQlEXLqwd9M", // Updated Link
+    },
+    {
+      id: "SHOWREEL_02",
+      title: "RAW & REAL",
+      desc: "Naturally Connecting Emotions Vision",
+      youtubeId: "HmGNWN4jStU", // Updated Link
     }
-  };
+  ]);
 
   const toggleMute = (e: React.MouseEvent) => {
     e.stopPropagation();
