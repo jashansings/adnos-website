@@ -664,9 +664,9 @@ const Contact = () => {
       <div className="mono-label flex flex-wrap justify-center gap-4 md:gap-10 pt-4 md:pt-8 opacity-60 text-[10px] md:text-xs">
   <a
     className="hover:opacity-100 hover:text-glitch-red underline decoration-glitch-red underline-offset-4 transition-colors break-all md:break-normal uppercase"
-    href="mailto:info.adnosproductions@gmail.com"
+    href="mailto:contact@adnos.co"
   >
-    info.adnosproductions@gmail.com
+    contact@adnos.co
   </a>
 
   <a
@@ -713,7 +713,7 @@ const Footer = () => (
           </h2>
           <div className="space-y-6">
             <a className="block text-xl md:text-3xl font-black underline decoration-glitch-red underline-offset-8 hover:text-glitch-red transition-colors break-all uppercase" href="mailto:info.adnosproductions@gmail.com">
-              INFO.ADNOSPRODUCTIONS@GMAIL.COM
+              contact@adnos.co
             </a>
             <p className="mono-label opacity-40 text-base md:text-lg">BASED IN MUMBAI, INDIA.</p>
           </div>
