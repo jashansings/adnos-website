@@ -631,7 +631,7 @@ const Crew = () => {
             { name: "DEVASISH BEHERA", role: "CO-FOUNDER AND EDITOR", id: "02", img: "/crew/DEVASISH.jpg" },
             { name: "JASHANPREET SINGH", role: "CO-FOUNDER & SOUND DIRECTOR", id: "03", img: "/crew/JASHANPREET.jpg" },
             { name: "AADITYA SHARMA", role: "CO-FOUNDER & DIRECTOR/EDITOR", id: "04", img: "/crew/AADITYA.jpg" },
-            { name: "KARTAVYA GUPTA", role: "MANAGER", id: "05", img: "/crew/KARTAVYA.jpg" },
+            // { name: "KARTAVYA GUPTA", role: "MANAGER", id: "05", img: "/crew/KARTAVYA.jpg" },
           ].map(member => (
             <div key={member.name} className={`p-6 md:p-8 group transition-all border-r border-b ${isDark ? 'hover:bg-white hover:text-black border-white/20 text-white' : 'bg-adnos-offwhite hover:bg-black hover:text-white border-black text-adnos-black'}`}>
               <div className={`aspect-square mb-6 overflow-hidden border relative ${isDark ? 'bg-[#111] border-white/20' : 'bg-adnos-gray border-black'}`}>
