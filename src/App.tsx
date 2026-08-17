@@ -712,7 +712,7 @@ const Footer = () => (
             GET IN TOUCH
           </h2>
           <div className="space-y-6">
-            <a className="block text-xl md:text-3xl font-black underline decoration-glitch-red underline-offset-8 hover:text-glitch-red transition-colors break-all uppercase" href="mailto:info.adnosproductions@gmail.com">
+            <a className="block text-xl md:text-3xl font-black underline decoration-glitch-red underline-offset-8 hover:text-glitch-red transition-colors break-all uppercase" href="mailto:contact@adnos.co">
               contact@adnos.co
             </a>
             <p className="mono-label opacity-40 text-base md:text-lg">BASED IN MUMBAI, INDIA.</p>
